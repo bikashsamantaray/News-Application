@@ -15,6 +15,6 @@ class NewsActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val newsNavHostFragment = findViewById<FragmentContainerView>(R.id.newsNavHostFragment)
-        bottomNavigationView.setupWithNavController(newsNavHostFragment.findNavController())
+        bottomNavigationView.setupWithNavController(newsNavHostFragment.findNavController());
     }
 }
