@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapplication.R
 import com.example.newsapplication.databinding.FragmentBreakingNewsBinding
@@ -27,6 +28,18 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
         binding = FragmentBreakingNewsBinding.bind(view)
         viewModel = (activity as NewsActivity).viewModel
         setUpRecyclerView()
+
+        newsAdapter.setonItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("article",it)
+            }
+            findNavController().navigate(
+                R.id.action_breakingNewsFragment_to_articleFragment,
+                bundle
+            )
+        }
+
+
 
         viewModel.breakingNews.observe(viewLifecycleOwner , Observer { response ->
             when(response){
@@ -53,6 +66,8 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
     }
 
     private fun showProgressBar(){
+
+        binding.paginationProgressBar.visibility = View.VISIBLE
 
     }
 

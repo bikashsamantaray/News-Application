@@ -47,5 +47,9 @@
         android:id="@+id/articleFragment"
         tools:layout="@layout/fragment_article"
         android:name="com.example.newsapplication.ui.fragments.ArticleFragment"
-        android:label="ArticleFragment" />
+        android:label="ArticleFragment" >
+        <argument
+            android:name="article"
+            app:argType="com.example.newsapplication.ui.models.Article" />
+    </fragment>
 </navigation>
