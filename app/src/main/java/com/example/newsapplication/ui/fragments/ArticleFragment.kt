@@ -10,11 +10,13 @@ import com.example.newsapplication.R
 import com.example.newsapplication.databinding.FragmentArticleBinding
 import com.example.newsapplication.databinding.FragmentBreakingNewsBinding
 import com.example.newsapplication.ui.NewsActivity
+import com.example.newsapplication.ui.NewsViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class ArticleFragment: Fragment(R.layout.fragment_article) {
 
     lateinit var binding: FragmentArticleBinding
-    lateinit var viewModel: ViewModel
+    lateinit var viewModel: NewsViewModel
     val args: ArticleFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,7 +25,12 @@ class ArticleFragment: Fragment(R.layout.fragment_article) {
         val article = args.article
         binding.webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(article.url)
+            loadUrl(article.url!!)
+        }
+        binding.fab.setOnClickListener {
+            viewModel.saveArticle(article)
+            Snackbar.make(view, "Article Saved Successfully",Snackbar.LENGTH_SHORT).show()
+
         }
     }
 }
